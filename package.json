@@ -1,0 +1,11 @@
+{
+  "name": "vite-wordpress-project",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "theme:install": "pnpm --dir web/app/themes/vite-wordpress install",
+    "dev": "pnpm --dir web/app/themes/vite-wordpress dev",
+    "build": "pnpm --dir web/app/themes/vite-wordpress build",
+    "package": "pnpm run build && node scripts/package-theme.mjs"
+  }
+}

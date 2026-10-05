@@ -1,0 +1,129 @@
+@use 'sass:color';
+
+$ink: #183153;
+$accent: #7c3aed;
+$paper: #f6f3ff;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: $ink;
+  background:
+    radial-gradient(circle at top left, rgba($accent, 0.14), transparent 35rem),
+    #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+}
+
+.site-header,
+.site-footer,
+.site-main {
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+}
+
+.site-header {
+  padding-block: 1.5rem;
+
+  &__brand {
+    font-weight: 800;
+    text-decoration: none;
+  }
+}
+
+.site-main {
+  padding-block: clamp(3rem, 10vw, 8rem);
+}
+
+.hero {
+  max-width: 48rem;
+  padding: clamp(2rem, 6vw, 5rem);
+  border: 1px solid rgba($accent, 0.18);
+  border-radius: 2rem;
+  background: rgba($paper, 0.86);
+  box-shadow: 0 1.5rem 4rem rgba($ink, 0.12);
+
+  &__eyebrow {
+    margin: 0 0 0.5rem;
+    color: $accent;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  &__lead {
+    max-width: 42rem;
+    margin-block: 1.5rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+.demo-button {
+  padding: 0.9rem 1.3rem;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: $accent;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+
+  &:hover,
+  &.is-active {
+    background: color.adjust($accent, $lightness: -10%);
+    transform: translateY(-2px);
+  }
+}
+
+.demo-message {
+  min-height: 1.7em;
+  margin-bottom: 0;
+  font-weight: 650;
+}
+
+.posts {
+  margin-top: 4rem;
+}
+
+.post-card {
+  padding-block: 1rem;
+  border-top: 1px solid rgba($ink, 0.15);
+}
+
+.site-footer {
+  padding-block: 2rem;
+  border-top: 1px solid rgba($ink, 0.12);
+  font-size: 0.9rem;
+}
+
+.vite-build-notice {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+  max-width: 32rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  color: #fff;
+  background: #b91c1c;
+}
+
+
+body{
+
+}

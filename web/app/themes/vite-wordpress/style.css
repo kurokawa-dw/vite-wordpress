@@ -1,0 +1,15 @@
+/*
+Theme Name: Vite WordPress Starter
+Theme URI: https://example.com/
+Author: Your Name
+Description: ViteでSCSSとJavaScriptをバンドルする最小構成のWordPressテーマです。
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 8.0
+Text Domain: vite-wordpress-starter
+*/
+
+/*
+ * WordPressがテーマとして認識するため、このファイルは残します。
+ * 実際のスタイルは src/scss/main.scss から読み込みます。
+ */

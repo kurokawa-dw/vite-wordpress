@@ -1,0 +1,36 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Composer-managed dependencies and WordPress core
+/vendor/
+/web/wp/
+/web/app/themes/twentytwentyfive/
+/web/app/plugins/*
+!/web/app/plugins/.gitkeep
+/web/app/mu-plugins/*/
+
+# Runtime data (keep these persistent outside each deployment)
+/web/app/uploads/*
+!/web/app/uploads/.gitkeep
+/web/app/cache/
+/web/app/upgrade/
+
+# Theme build dependencies and output
+/web/app/themes/vite-wordpress/node_modules/
+/web/app/themes/vite-wordpress/dist/
+/release/
+
+# Test / WP-CLI local state
+phpunit.xml
+.phpunit.result.cache
+.phpunit.cache
+wp-cli.local.yml
+auth.json
