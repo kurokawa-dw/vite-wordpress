@@ -1,12 +1,12 @@
 <?php
+
 /**
  * Main template.
  *
  * @package ViteWordPressStarter
  */
 
-get_header();
-?>
+get_header(); ?>
 
 <main class="site-main">
     <section class="hero">
@@ -24,5 +24,4 @@ get_header();
 
 </main>
 
-<?php
-get_footer();
+<?php get_footer();

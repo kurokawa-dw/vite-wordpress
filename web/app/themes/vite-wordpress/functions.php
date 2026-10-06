@@ -6,8 +6,8 @@
  * @package ViteWordPressStarter
  */
 
-if (! defined('ABSPATH')) {
-    exit;
+if (!defined('ABSPATH')) {
+    exit();
 }
 
 /**
@@ -17,7 +17,15 @@ function vite_wordpress_starter_setup(): void
 {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
-    add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
+    add_theme_support('html5', [
+        'search-form',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+        'style',
+        'script',
+    ]);
 }
 add_action('after_setup_theme', 'vite_wordpress_starter_setup');
 
@@ -35,13 +43,13 @@ function vite_wordpress_starter_get_entries(): array
         'vite-wordpress-starter' => 'src/js/main.js',
     ];
 
-    if (! is_page()) {
+    if (!is_page()) {
         return $entries;
     }
 
     $page_uri = get_page_uri(get_queried_object_id());
 
-    if (! is_string($page_uri) || $page_uri === '') {
+    if (!is_string($page_uri) || $page_uri === '') {
         return $entries;
     }
 
@@ -63,26 +71,14 @@ function vite_wordpress_starter_enqueue_development_assets(array $entries): void
         ? untrailingslashit(VITE_DEV_SERVER)
         : 'http://localhost:5173';
 
-    wp_enqueue_script(
-        'vite-client',
-        $vite_server . '/@vite/client',
-        [],
-        null,
-        false,
-    );
+    wp_enqueue_script('vite-client', $vite_server . '/@vite/client', [], null, false);
 
     foreach ($entries as $handle => $entry_key) {
-        if (! file_exists(get_theme_file_path($entry_key))) {
+        if (!file_exists(get_theme_file_path($entry_key))) {
             continue;
         }
 
-        wp_enqueue_script(
-            $handle,
-            $vite_server . '/' . $entry_key,
-            [],
-            null,
-            true,
-        );
+        wp_enqueue_script($handle, $vite_server . '/' . $entry_key, [], null, true);
     }
 }
 
@@ -95,7 +91,7 @@ function vite_wordpress_starter_enqueue_production_assets(array $entries): void
 {
     $manifest_path = get_theme_file_path('dist/.vite/manifest.json');
 
-    if (! file_exists($manifest_path)) {
+    if (!file_exists($manifest_path)) {
         if (current_user_can('manage_options')) {
             add_action('wp_footer', static function (): void {
                 echo '<p class="vite-build-notice">Viteのビルドファイルがありません。テーマディレクトリで <code>npm run build</code> を実行してください。</p>';
@@ -107,14 +103,14 @@ function vite_wordpress_starter_enqueue_production_assets(array $entries): void
 
     $manifest = json_decode((string) file_get_contents($manifest_path), true);
 
-    if (! is_array($manifest)) {
+    if (!is_array($manifest)) {
         return;
     }
 
     $theme_version = wp_get_theme()->get('Version');
 
     foreach ($entries as $handle => $entry_key) {
-        if (! isset($manifest[$entry_key]['file'])) {
+        if (!isset($manifest[$entry_key]['file'])) {
             continue;
         }
 
@@ -145,11 +141,7 @@ function vite_wordpress_starter_enqueue_production_assets(array $entries): void
 function vite_wordpress_starter_enqueue_assets(): void
 {
     $entries = vite_wordpress_starter_get_entries();
-    $is_local = in_array(
-        wp_get_environment_type(),
-        ['local', 'development'],
-        true,
-    );
+    $is_local = in_array(wp_get_environment_type(), ['local', 'development'], true);
 
     if ($is_local) {
         vite_wordpress_starter_enqueue_development_assets($entries);
@@ -170,7 +162,7 @@ add_action('wp_enqueue_scripts', 'vite_wordpress_starter_enqueue_assets');
  */
 function vite_wordpress_starter_module_scripts(string $tag, string $handle): string
 {
-    if ($handle !== 'vite-client' && ! str_starts_with($handle, 'vite-wordpress-')) {
+    if ($handle !== 'vite-client' && !str_starts_with($handle, 'vite-wordpress-')) {
         return $tag;
     }
 

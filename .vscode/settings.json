@@ -1,5 +1,6 @@
 {
   "prettier.requireConfig": true,
+  "prettier.prettierPath": "web/app/themes/vite-wordpress/node_modules/prettier",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
@@ -37,17 +38,38 @@
     "editor.formatOnSave": true
   },
   "[php]": {
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
   },
-  "emeraldwalk.runonsave": {
-    "ignoreUnchangedFiles": true,
-    "commands": [
-      {
-        "match": "(?:[\\\\/](?:config|tests)[\\\\/].*|[\\\\/]web[\\\\/]app[\\\\/]themes[\\\\/]vite-wordpress[\\\\/].*|[\\\\/]web[\\\\/](?:index|wp-config))\\.php$",
-        "notMatch": "[\\\\/](?:vendor|node_modules|web[\\\\/]wp|web[\\\\/]app[\\\\/](?:languages|plugins|mu-plugins|uploads))[\\\\/]",
-        "cmd": "\"${workspaceFolder}/vendor/bin/pint\" --config \"${workspaceFolder}/pint.json\" \"${file}\"",
-        "autoShowOutputPanel": "error"
-      }
-    ]
-  }
+  "files.readonlyInclude": {
+    "**/node_modules/**/*": true,
+    "vendor/**/*": true,
+    "web/wp/**/*": true,
+    "web/app/languages/**/*": true,
+    "web/app/mu-plugins/**/*": true,
+    "web/app/plugins/**/*": true,
+    "web/app/themes/twentytwentyfive/**/*": true,
+    "web/app/uploads/**/*": true
+  },
+  "php.validate.executablePath": "/Applications/MAMP/bin/php/php/bin/php",
+  "intelephense.environment.phpVersion": "8.3.0",
+  "intelephense.files.exclude": [
+    "**/.git/**",
+    "**/.svn/**",
+    "**/.hg/**",
+    "**/CVS/**",
+    "**/.DS_Store/**",
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/web/app/languages/**",
+    "**/web/app/mu-plugins/**",
+    "**/web/app/plugins/**",
+    "**/web/app/themes/twentytwentyfive/**",
+    "**/web/app/uploads/**"
+  ],
+  "intelephense.format.braces": "per"
 }

@@ -1,12 +1,12 @@
 <?php
+
 /**
  * Main template.
  *
  * @package ViteWordPressStarter
  */
 
-get_header();
-?>
+get_header(); ?>
 
 <main class="site-main">
     <section class="hero">
@@ -21,10 +21,10 @@ get_header();
         <p class="demo-message" data-demo-message aria-live="polite"></p>
     </section>
 
-    <?php if (have_posts()) : ?>
+    <?php if (have_posts()): ?>
         <section class="posts">
             <h2>投稿</h2>
-            <?php while (have_posts()) : ?>
+            <?php while (have_posts()): ?>
                 <?php the_post(); ?>
                 <article <?php post_class('post-card'); ?>>
                     <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -35,5 +35,4 @@ get_header();
     <?php endif; ?>
 </main>
 
-<?php
-get_footer();
+<?php get_footer();
