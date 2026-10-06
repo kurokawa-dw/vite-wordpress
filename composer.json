@@ -71,8 +71,10 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "lint": "pint --test",
-    "lint:fix": "pint",
+    "format": "pint config tests web/app/themes/vite-wordpress web/index.php web/wp-config.php",
+    "format:check": "pint --test config tests web/app/themes/vite-wordpress web/index.php web/wp-config.php",
+    "lint": "@format:check",
+    "lint:fix": "@format",
     "test": "pest"
   }
 }

@@ -6,6 +6,8 @@
     "theme:install": "pnpm --dir web/app/themes/vite-wordpress install",
     "dev": "pnpm --dir web/app/themes/vite-wordpress dev",
     "build": "pnpm --dir web/app/themes/vite-wordpress build",
-    "package": "pnpm run build && node scripts/package-theme.mjs"
+    "package": "pnpm run build && node scripts/package-theme.mjs",
+    "format": "composer format && pnpm --dir web/app/themes/vite-wordpress format",
+    "format:check": "composer format:check && pnpm --dir web/app/themes/vite-wordpress format:check"
   }
 }

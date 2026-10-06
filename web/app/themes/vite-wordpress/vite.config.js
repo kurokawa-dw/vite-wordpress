@@ -37,9 +37,7 @@ export default defineConfig({
       '@scss': resolve(themeRoot, 'src/scss'),
     },
   },
-  plugins: [
-    FullReload(['**/*.php']),
-  ],
+  plugins: [FullReload(['**/*.php'])],
   build: {
     manifest: true,
     outDir: 'dist',

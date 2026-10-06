@@ -20,5 +20,4 @@ if (import.meta.hot) {
   console.info('Vite HMR is connected.');
 }
 
-
-console.log('wordpress startだよ')
+console.log('wordpress startだよ');
