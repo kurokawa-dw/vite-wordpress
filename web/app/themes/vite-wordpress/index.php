@@ -33,6 +33,117 @@ get_header(); ?>
             <?php endwhile; ?>
         </section>
     <?php endif; ?>
+    <!--
+    <?php
+    $query = new WP_Query([
+        'post_type' => 'news',
+        'posts_per_page' => 3
+    ]);
+    ?>
+
+    <?php if ($query->have_posts()) : ?>
+        <?php while ($query->have_posts()) : ?>
+            <?php $query->the_post(); ?>
+            <article>
+                <h3>
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_title(); ?>
+                    </a>
+                </h3>
+            </article>
+        <?php endwhile; ?>
+    <?php endif; ?> -->
+
+    <!-- 複数の投稿 -->
+    <!-- 通常投稿 -->
+    <section>
+        <h2>ブログ</h2>
+
+        <?php
+        $posts_query = new WP_Query([
+            'post_type'      => 'post',
+            'posts_per_page' => 3,
+        ]);
+        ?>
+
+        <?php if ($posts_query->have_posts()) : ?>
+            <?php while ($posts_query->have_posts()) : ?>
+                <?php $posts_query->the_post(); ?>
+
+                <article>
+                    <h3>
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </a>
+                    </h3>
+                </article>
+
+            <?php endwhile; ?>
+
+            <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+    </section>
+
+
+    <!-- お知らせ -->
+    <section>
+        <h2>お知らせ</h2>
+
+        <?php
+        $news_query = new WP_Query([
+            'post_type'      => 'news',
+            'posts_per_page' => 3,
+        ]);
+        ?>
+
+        <?php if ($news_query->have_posts()) : ?>
+            <?php while ($news_query->have_posts()) : ?>
+                <?php $news_query->the_post(); ?>
+
+                <article>
+                    <h3>
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </a>
+                    </h3>
+                </article>
+
+            <?php endwhile; ?>
+
+            <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+    </section>
+
+
+    <!-- 商品 -->
+    <section>
+        <h2>商品</h2>
+
+        <?php
+        $products_query = new WP_Query([
+            'post_type'      => 'products',
+            'posts_per_page' => 3,
+        ]);
+        ?>
+
+        <?php if ($products_query->have_posts()) : ?>
+            <?php while ($products_query->have_posts()) : ?>
+                <?php $products_query->the_post(); ?>
+
+                <article>
+                    <h3>
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </a>
+                    </h3>
+                </article>
+
+            <?php endwhile; ?>
+
+            <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+    </section>
+    <!-- 複数の投稿 -->
 </main>
 
-<?php get_footer();
+<?php get_footer(); ?>

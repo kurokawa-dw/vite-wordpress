@@ -169,3 +169,6 @@ function vite_wordpress_starter_module_scripts(string $tag, string $handle): str
     return str_replace('<script ', '<script type="module" ', $tag);
 }
 add_filter('script_loader_tag', 'vite_wordpress_starter_module_scripts', 10, 2);
+
+
+require_once get_template_directory() . '/inc/post-types.php';
