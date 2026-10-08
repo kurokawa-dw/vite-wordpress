@@ -36,8 +36,11 @@ function shouldInclude(source) {
 
   const pathParts = relativePath.split(sep);
   const fileName = pathParts.at(-1);
+  const isPrettierConfig = fileName.startsWith('.prettier')
+    || fileName.startsWith('prettier.config.');
 
   return !pathParts.some((part) => excludedNames.has(part))
+    && !isPrettierConfig
     && !fileName.endsWith('.log');
 }
 
