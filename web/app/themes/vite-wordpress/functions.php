@@ -51,6 +51,12 @@ function vite_wordpress_starter_get_entries(): array
         return $entries;
     }
 
+    if (is_post_type_archive('news')) {
+        $entries['vite-wordpress-archive-news'] = 'src/js/archives/news/index.js';
+
+        return $entries;
+    }
+
     if (!is_page()) {
         return $entries;
     }
