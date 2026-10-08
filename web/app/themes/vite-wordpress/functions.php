@@ -32,8 +32,10 @@ add_action('after_setup_theme', 'vite_wordpress_starter_setup');
 /**
  * 現在のページで必要なViteエントリーを返す。
  *
- * 固定ページでは、ページ階層とsrc/js/pages以下のディレクトリ階層を対応させる。
+ * 固定ページではページ階層、投稿タイプアーカイブでは投稿タイプ名と
+ * src/js以下のディレクトリ階層を対応させる。
  * 例: /about/company/ -> src/js/pages/about/company/index.js
+ * 例: /products/ -> src/js/archives/products/index.js
  *
  * @return array<string, string>
  */
@@ -42,6 +44,12 @@ function vite_wordpress_starter_get_entries(): array
     $entries = [
         'vite-wordpress-starter' => 'src/js/main.js',
     ];
+
+    if (is_post_type_archive('products')) {
+        $entries['vite-wordpress-archive-products'] = 'src/js/archives/products/index.js';
+
+        return $entries;
+    }
 
     if (!is_page()) {
         return $entries;
@@ -180,6 +188,8 @@ function mytheme_get_company_group(string $anchor): string
         'post_content',
         get_queried_object_id()
     );
+
+    // error_log('$content コンテンツ:' . print_r($content, true));
 
     $blocks = parse_blocks((string) $content);
 
