@@ -172,3 +172,25 @@ add_filter('script_loader_tag', 'vite_wordpress_starter_module_scripts', 10, 2);
 
 
 require_once get_template_directory() . '/inc/post-types.php';
+
+
+function mytheme_get_company_group(string $anchor): string
+{
+    $content = get_post_field(
+        'post_content',
+        get_queried_object_id()
+    );
+
+    $blocks = parse_blocks((string) $content);
+
+    foreach ($blocks as $block) {
+        if (
+            ($block['blockName'] ?? '') === 'core/group' &&
+            ($block['attrs']['anchor'] ?? '') === $anchor
+        ) {
+            return render_block($block);
+        }
+    }
+
+    return '';
+}

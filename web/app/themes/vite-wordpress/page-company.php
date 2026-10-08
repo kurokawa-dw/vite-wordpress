@@ -146,6 +146,10 @@ get_header(); ?>
                     </div>
                 </dl>
             </div>
+
+            <div class="company-profile">
+                <?= mytheme_get_company_group('company-profile'); ?>
+            </div>
         </section>
 
         <section id="history" class="company-section" data-company-reveal>
