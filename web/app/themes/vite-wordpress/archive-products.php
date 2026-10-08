@@ -59,11 +59,27 @@ $published_product_count = isset($product_counts->publish) ? (int) $product_coun
                     <?php
                     the_post();
                     $product_excerpt = get_the_excerpt();
+                    $product_image = function_exists('get_field')
+                        ? get_field('product_image')
+                        : null;
                     ?>
                     <article <?php post_class('product-card'); ?> data-products-reveal>
                         <a class="product-card__link" href="<?php the_permalink(); ?>">
                             <div class="product-card__media">
-                                <?php if (has_post_thumbnail()): ?>
+                                <?php if (is_array($product_image) && !empty($product_image['ID'])): ?>
+                                    <?php
+                                    echo wp_get_attachment_image(
+                                        (int) $product_image['ID'],
+                                        'large',
+                                        false,
+                                        [
+                                            'class' => 'product-card__image',
+                                            'loading' => 'lazy',
+                                            'alt' => $product_image['alt'] ?: get_the_title(),
+                                        ]
+                                    );
+                                    ?>
+                                <?php elseif (has_post_thumbnail()): ?>
                                     <?php
                                     the_post_thumbnail('large', [
                                         'class' => 'product-card__image',

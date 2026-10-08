@@ -15,7 +15,7 @@ function register_custom_post_type()
         ],
         'public' => true,
         'has_archive' => true,
-
+        'show_in_rest' => true,
         'supports' => [
             'title',
             'editor',
@@ -42,7 +42,6 @@ function register_custom_post_type()
 
         'supports' => [
             'title',
-            'editor',
             'thumbnail'
         ],
         'menu_position' => 5,
