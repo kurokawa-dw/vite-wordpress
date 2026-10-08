@@ -54,46 +54,11 @@ $published_product_count = (int) wp_count_posts('products')->publish;
                     <?php
                     the_post();
                     $product_excerpt = get_the_excerpt();
-                    $product_image = function_exists('get_field')
-                        ? get_field('product_image')
-                        : get_post_meta(get_the_ID(), 'product_image', true);
-                    $product_image_id = 0;
-                    $product_image_url = '';
-                    $product_image_alt = get_the_title();
-
-                    if (is_array($product_image)) {
-                        $product_image_id = (int) ($product_image['ID'] ?? $product_image['id'] ?? 0);
-                        $product_image_url = (string) ($product_image['url'] ?? '');
-                        $custom_image_alt = trim((string) ($product_image['alt'] ?? ''));
-
-                        if ($custom_image_alt !== '') {
-                            $product_image_alt = $custom_image_alt;
-                        }
-                    } elseif (is_numeric($product_image)) {
-                        $product_image_id = (int) $product_image;
-                    } elseif (is_string($product_image)) {
-                        $product_image_url = $product_image;
-                    }
                     ?>
                     <article <?php post_class('product-card'); ?> data-products-reveal>
                         <a class="product-card__link" href="<?php the_permalink(); ?>">
                             <div class="product-card__media">
-                                <?php if ($product_image_id > 0): ?>
-                                    <?php
-                                    echo wp_get_attachment_image($product_image_id, 'large', false, [
-                                        'class' => 'product-card__image',
-                                        'loading' => 'lazy',
-                                        'alt' => $product_image_alt,
-                                    ]);
-                                    ?>
-                                <?php elseif ($product_image_url !== ''): ?>
-                                    <img
-                                        class="product-card__image"
-                                        src="<?php echo esc_url($product_image_url); ?>"
-                                        alt="<?php echo esc_attr($product_image_alt); ?>"
-                                        loading="lazy"
-                                    >
-                                <?php elseif (has_post_thumbnail()): ?>
+                                <?php if (has_post_thumbnail()): ?>
                                     <?php
                                     the_post_thumbnail('large', [
                                         'class' => 'product-card__image',
