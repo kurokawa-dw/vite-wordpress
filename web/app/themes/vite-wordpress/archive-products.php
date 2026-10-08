@@ -8,7 +8,12 @@
 
 get_header();
 
-$published_product_count = (int) wp_count_posts('products')->publish;
+$product_counts = wp_count_posts('products');
+
+// echo '<pre>';
+// print_r($product_counts);
+// echo '</pre>';
+$published_product_count = isset($product_counts->publish) ? (int) $product_counts->publish : 0;
 ?>
 
 <main class="site-main products-archive">
