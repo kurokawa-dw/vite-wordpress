@@ -14,6 +14,14 @@ $product_counts = wp_count_posts('products');
 // print_r($product_counts);
 // echo '</pre>';
 $published_product_count = isset($product_counts->publish) ? (int) $product_counts->publish : 0;
+$products_archive_url = get_post_type_archive_link('products');
+$selected_product_category = sanitize_title((string) get_query_var('product_category'));
+$selected_product_brand = sanitize_title((string) get_query_var('product_brand'));
+
+// 「すべて」を選択した場合、wp_dropdown_categories() は 0 を送信する。
+$selected_product_category = $selected_product_category === '0' ? '' : $selected_product_category;
+$selected_product_brand = $selected_product_brand === '0' ? '' : $selected_product_brand;
+$has_product_filters = $selected_product_category !== '' || $selected_product_brand !== '';
 ?>
 
 <main class="site-main products-archive">
@@ -52,6 +60,60 @@ $published_product_count = isset($product_counts->publish) ? (int) $product_coun
             </div>
             <p>気になる商品を選んで、詳しい特徴をご覧ください。</p>
         </header>
+
+        <form
+            class="products-filter"
+            method="get"
+            action="<?php echo esc_url($products_archive_url); ?>"
+            aria-label="商品を絞り込む"
+            data-products-reveal
+        >
+            <div class="products-filter__field">
+                <label for="product-category">商品カテゴリー</label>
+                <?php
+                wp_dropdown_categories([
+                    'taxonomy' => 'product_category',
+                    'name' => 'product_category',
+                    'id' => 'product-category',
+                    'class' => 'products-filter__select',
+                    'value_field' => 'slug',
+                    'selected' => $selected_product_category,
+                    'show_option_all' => 'すべての商品カテゴリー',
+                    'hierarchical' => true,
+                    'hide_empty' => true,
+                ]);
+                ?>
+            </div>
+
+            <div class="products-filter__field">
+                <label for="product-brand">ブランド</label>
+                <?php
+                wp_dropdown_categories([
+                    'taxonomy' => 'product_brand',
+                    'name' => 'product_brand',
+                    'id' => 'product-brand',
+                    'class' => 'products-filter__select',
+                    'value_field' => 'slug',
+                    'selected' => $selected_product_brand,
+                    'show_option_all' => 'すべてのブランド',
+                    'hierarchical' => true,
+                    'hide_empty' => true,
+                ]);
+                ?>
+            </div>
+
+            <div class="products-filter__actions">
+                <button type="submit">絞り込む</button>
+
+                <?php if ($has_product_filters): ?>
+                    <a href="<?php echo esc_url($products_archive_url); ?>">条件をクリア</a>
+                <?php endif; ?>
+            </div>
+
+            <p class="products-filter__result">
+                <?php echo esc_html(sprintf('該当商品 %d件', (int) $wp_query->found_posts)); ?>
+            </p>
+        </form>
 
         <?php if (have_posts()): ?>
             <div class="products-grid">
@@ -116,6 +178,10 @@ $published_product_count = isset($product_counts->publish) ? (int) $product_coun
             <?php
             $pagination = paginate_links([
                 'type' => 'list',
+                'add_args' => array_filter([
+                    'product_category' => $selected_product_category,
+                    'product_brand' => $selected_product_brand,
+                ]),
                 'prev_text' => '<span aria-hidden="true">&#8592;</span><span class="screen-reader-text">前のページ</span>',
                 'next_text' => '<span class="screen-reader-text">次のページ</span><span aria-hidden="true">&#8594;</span>',
             ]);
@@ -128,9 +194,15 @@ $published_product_count = isset($product_counts->publish) ? (int) $product_coun
         <?php else: ?>
             <div class="products-empty" data-products-reveal>
                 <span aria-hidden="true">○</span>
-                <h2>商品を準備しています</h2>
-                <p>新しい商品をまもなくご紹介します。公開までしばらくお待ちください。</p>
-                <a href="<?php echo esc_url(home_url('/')); ?>">トップページへ戻る</a>
+                <?php if ($has_product_filters): ?>
+                    <h2>条件に一致する商品がありません</h2>
+                    <p>商品カテゴリーまたはブランドを変更してお試しください。</p>
+                    <a href="<?php echo esc_url($products_archive_url); ?>">すべての商品を表示</a>
+                <?php else: ?>
+                    <h2>商品を準備しています</h2>
+                    <p>新しい商品をまもなくご紹介します。公開までしばらくお待ちください。</p>
+                    <a href="<?php echo esc_url(home_url('/')); ?>">トップページへ戻る</a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </section>

@@ -156,6 +156,88 @@ body.post-type-archive-products {
   }
 }
 
+.products-filter {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(12rem, 1fr)) auto;
+  gap: 1.25rem;
+  align-items: end;
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid $products-line;
+  border-radius: 1rem;
+  background: $products-cream;
+
+  &__field {
+    display: grid;
+    gap: 0.55rem;
+
+    label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  &__select {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.65rem 2.5rem 0.65rem 0.9rem;
+    border: 1px solid rgba($products-ink, 0.24);
+    border-radius: 0.45rem;
+    color: $products-ink;
+    background-color: #fff;
+    font: inherit;
+
+    &:focus-visible {
+      outline: 2px solid $products-orange;
+      outline-offset: 2px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    min-height: 3rem;
+
+    button,
+    a {
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    button {
+      min-height: 3rem;
+      padding-inline: 1.4rem;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: $products-ink;
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible {
+        background: color.adjust($products-ink, $lightness: 8%);
+      }
+    }
+
+    a {
+      padding-bottom: 0.15rem;
+      border-bottom: 1px solid currentColor;
+      text-decoration: none;
+    }
+  }
+
+  &__result {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: $products-muted;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -422,6 +504,14 @@ body.post-type-archive-products {
   .products-catalogue__header {
     grid-template-columns: 1fr;
   }
+
+  .products-filter {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    &__actions {
+      grid-column: 1 / -1;
+    }
+  }
 }
 
 @media (max-width: 38rem) {
@@ -436,6 +526,15 @@ body.post-type-archive-products {
   .products-grid {
     grid-template-columns: 1fr;
     gap: 3.5rem;
+  }
+
+  .products-filter {
+    grid-template-columns: 1fr;
+
+    &__actions {
+      grid-column: auto;
+      flex-wrap: wrap;
+    }
   }
 
   .product-card {
