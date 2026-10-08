@@ -187,6 +187,7 @@ add_filter('script_loader_tag', 'vite_wordpress_starter_module_scripts', 10, 2);
 
 require_once get_template_directory() . '/inc/post-types.php';
 require_once get_template_directory() . '/inc/taxonomies.php';
+require_once get_template_directory() . '/inc/product-filters.php';
 
 
 function mytheme_get_company_group(string $anchor): string

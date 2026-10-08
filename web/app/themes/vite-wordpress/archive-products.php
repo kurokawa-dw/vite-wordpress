@@ -14,14 +14,29 @@ $product_counts = wp_count_posts('products');
 // print_r($product_counts);
 // echo '</pre>';
 $published_product_count = isset($product_counts->publish) ? (int) $product_counts->publish : 0;
-$products_archive_url = get_post_type_archive_link('products');
-$selected_product_category = sanitize_title((string) get_query_var('product_category'));
-$selected_product_brand = sanitize_title((string) get_query_var('product_brand'));
 
-// 「すべて」を選択した場合、wp_dropdown_categories() は 0 を送信する。
-$selected_product_category = $selected_product_category === '0' ? '' : $selected_product_category;
-$selected_product_brand = $selected_product_brand === '0' ? '' : $selected_product_brand;
-$has_product_filters = $selected_product_category !== '' || $selected_product_brand !== '';
+$products_archive_url = get_post_type_archive_link('products');
+$selected_product_categories = vite_wordpress_sanitize_product_filter_terms(
+    get_query_var('product_categories', [])
+);
+$selected_product_brands = vite_wordpress_sanitize_product_filter_terms(
+    get_query_var('product_brands', [])
+);
+$has_product_filters = $selected_product_categories !== [] || $selected_product_brands !== [];
+
+$product_category_terms = get_terms([
+    'taxonomy' => 'product_category',
+    'hide_empty' => true,
+    'orderby' => 'name',
+]);
+$product_brand_terms = get_terms([
+    'taxonomy' => 'product_brand',
+    'hide_empty' => true,
+    'orderby' => 'name',
+]);
+
+$product_category_terms = is_wp_error($product_category_terms) ? [] : $product_category_terms;
+$product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_terms;
 ?>
 
 <main class="site-main products-archive">
@@ -66,41 +81,46 @@ $has_product_filters = $selected_product_category !== '' || $selected_product_br
             method="get"
             action="<?php echo esc_url($products_archive_url); ?>"
             aria-label="商品を絞り込む"
-            data-products-reveal
-        >
-            <div class="products-filter__field">
-                <label for="product-category">商品カテゴリー</label>
-                <?php
-                wp_dropdown_categories([
-                    'taxonomy' => 'product_category',
-                    'name' => 'product_category',
-                    'id' => 'product-category',
-                    'class' => 'products-filter__select',
-                    'value_field' => 'slug',
-                    'selected' => $selected_product_category,
-                    'show_option_all' => 'すべての商品カテゴリー',
-                    'hierarchical' => true,
-                    'hide_empty' => true,
-                ]);
-                ?>
-            </div>
+            data-products-reveal>
+            <fieldset class="products-filter__group">
+                <legend>商品カテゴリー</legend>
+                <?php if ($product_category_terms !== []): ?>
+                    <div class="products-filter__options">
+                        <?php foreach ($product_category_terms as $term): ?>
+                            <label class="products-filter__option">
+                                <input
+                                    type="checkbox"
+                                    name="product_categories[]"
+                                    value="<?php echo esc_attr($term->slug); ?>"
+                                    <?php checked(in_array($term->slug, $selected_product_categories, true)); ?>>
+                                <span><?php echo esc_html($term->name); ?></span>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p class="products-filter__empty">選択できる商品カテゴリーはありません。</p>
+                <?php endif; ?>
+            </fieldset>
 
-            <div class="products-filter__field">
-                <label for="product-brand">ブランド</label>
-                <?php
-                wp_dropdown_categories([
-                    'taxonomy' => 'product_brand',
-                    'name' => 'product_brand',
-                    'id' => 'product-brand',
-                    'class' => 'products-filter__select',
-                    'value_field' => 'slug',
-                    'selected' => $selected_product_brand,
-                    'show_option_all' => 'すべてのブランド',
-                    'hierarchical' => true,
-                    'hide_empty' => true,
-                ]);
-                ?>
-            </div>
+            <fieldset class="products-filter__group">
+                <legend>ブランド</legend>
+                <?php if ($product_brand_terms !== []): ?>
+                    <div class="products-filter__options">
+                        <?php foreach ($product_brand_terms as $term): ?>
+                            <label class="products-filter__option">
+                                <input
+                                    type="checkbox"
+                                    name="product_brands[]"
+                                    value="<?php echo esc_attr($term->slug); ?>"
+                                    <?php checked(in_array($term->slug, $selected_product_brands, true)); ?>>
+                                <span><?php echo esc_html($term->name); ?></span>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p class="products-filter__empty">選択できるブランドはありません。</p>
+                <?php endif; ?>
+            </fieldset>
 
             <div class="products-filter__actions">
                 <button type="submit">絞り込む</button>
@@ -179,8 +199,8 @@ $has_product_filters = $selected_product_category !== '' || $selected_product_br
             $pagination = paginate_links([
                 'type' => 'list',
                 'add_args' => array_filter([
-                    'product_category' => $selected_product_category,
-                    'product_brand' => $selected_product_brand,
+                    'product_categories' => $selected_product_categories,
+                    'product_brands' => $selected_product_brands,
                 ]),
                 'prev_text' => '<span aria-hidden="true">&#8592;</span><span class="screen-reader-text">前のページ</span>',
                 'next_text' => '<span class="screen-reader-text">次のページ</span><span aria-hidden="true">&#8594;</span>',

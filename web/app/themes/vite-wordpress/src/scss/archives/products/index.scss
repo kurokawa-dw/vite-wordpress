@@ -158,47 +158,76 @@ body.post-type-archive-products {
 
 .products-filter {
   display: grid;
-  grid-template-columns: repeat(2, minmax(12rem, 1fr)) auto;
-  gap: 1.25rem;
-  align-items: end;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem clamp(1.5rem, 4vw, 4rem);
   margin-bottom: clamp(3rem, 7vw, 5rem);
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid $products-line;
   border-radius: 1rem;
   background: $products-cream;
 
-  &__field {
-    display: grid;
-    gap: 0.55rem;
+  &__group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
 
-    label {
+    legend {
+      margin-bottom: 0.85rem;
+      padding: 0;
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.08em;
     }
   }
 
-  &__select {
-    width: 100%;
-    min-height: 3rem;
-    padding: 0.65rem 2.5rem 0.65rem 0.9rem;
-    border: 1px solid rgba($products-ink, 0.24);
-    border-radius: 0.45rem;
-    color: $products-ink;
-    background-color: #fff;
-    font: inherit;
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
 
-    &:focus-visible {
-      outline: 2px solid $products-orange;
-      outline-offset: 2px;
+  &__option {
+    display: inline-flex;
+    gap: 0.55rem;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid rgba($products-ink, 0.18);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease;
+
+    input {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      accent-color: $products-orange;
     }
+
+    &:hover,
+    &:focus-within {
+      border-color: $products-orange;
+      background: rgba($products-orange, 0.06);
+    }
+  }
+
+  &__empty {
+    margin: 0;
+    color: $products-muted;
+    font-size: 0.82rem;
   }
 
   &__actions {
     display: flex;
+    grid-column: 1 / -1;
     gap: 0.9rem;
     align-items: center;
-    min-height: 3rem;
 
     button,
     a {
@@ -504,14 +533,6 @@ body.post-type-archive-products {
   .products-catalogue__header {
     grid-template-columns: 1fr;
   }
-
-  .products-filter {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    &__actions {
-      grid-column: 1 / -1;
-    }
-  }
 }
 
 @media (max-width: 38rem) {
@@ -532,7 +553,6 @@ body.post-type-archive-products {
     grid-template-columns: 1fr;
 
     &__actions {
-      grid-column: auto;
       flex-wrap: wrap;
     }
   }
