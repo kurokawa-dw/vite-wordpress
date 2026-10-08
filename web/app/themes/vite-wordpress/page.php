@@ -22,7 +22,7 @@ get_header(); ?>
     </section>
 
     <section class="contents">
-
+        <?php the_content(); ?>
     </section>
 
 
