@@ -24,11 +24,14 @@ $selected_product_brands = vite_wordpress_sanitize_product_filter_terms(
 );
 $has_product_filters = $selected_product_categories !== [] || $selected_product_brands !== [];
 
+// 管理画面で設定されているproduct_category のtermを取得
 $product_category_terms = get_terms([
     'taxonomy' => 'product_category',
     'hide_empty' => true,
     'orderby' => 'name',
 ]);
+
+// 管理画面で設定されている product_brand のtermを取得
 $product_brand_terms = get_terms([
     'taxonomy' => 'product_brand',
     'hide_empty' => true,

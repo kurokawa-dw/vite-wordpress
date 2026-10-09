@@ -23,21 +23,30 @@ add_filter('query_vars', 'vite_wordpress_register_product_filter_query_vars');
  */
 function vite_wordpress_sanitize_product_filter_terms(mixed $terms): array
 {
+
+    // $termが配列かどうかチェックして、必ず配列にする
     if (!is_array($terms)) {
         $terms = $terms === null || $terms === '' ? [] : [$terms];
     }
 
+    // error_log('$term引数: ' . print_r($terms, true));
+
     $sanitized_terms = array_map(
         static function (mixed $term): string {
+            // スカラー値じゃなければから文字にする
             if (!is_scalar($term)) {
                 return '';
             }
 
+            // バックスラッシュをとり、数字などのスカラー値を文字列に変換して、かつslugに適した形に整えてreturn
             return sanitize_title(wp_unslash((string) $term));
         },
         $terms,
     );
 
+    // error_log('$sanitized_terms: ' . print_r($sanitized_terms, true));
+
+    // 空value、重複、を削除してキーindexを振り直してreturn
     return array_values(array_unique(array_filter($sanitized_terms)));
 }
 
@@ -58,6 +67,10 @@ function vite_wordpress_filter_products_archive(WP_Query $query): void
     $product_brands = vite_wordpress_sanitize_product_filter_terms(
         $query->get('product_brands'),
     );
+
+    error_log('$query get: ' . print_r($query->get('product_categories'), true));
+    error_log('$product_categories: ' . print_r($product_categories, true));
+    error_log('$product_brands: ' . print_r($product_brands, true));
 
     $query->set('product_categories', $product_categories);
     $query->set('product_brands', $product_brands);
