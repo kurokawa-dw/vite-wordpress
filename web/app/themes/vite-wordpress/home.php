@@ -12,7 +12,7 @@ get_header();
 <main class="site-main news-archive">
     <?php if (have_posts()): ?>
         <section class="posts">
-            <h2>Notebook（メイン投稿）</h2>
+            <h2>Notebook（メイン投稿、home.php）</h2>
             <?php while (have_posts()): ?>
                 <?php the_post(); ?>
                 <article <?php post_class('post-card'); ?>>
