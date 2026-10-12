@@ -45,6 +45,12 @@ function vite_wordpress_starter_get_entries(): array
         'vite-wordpress-starter' => 'src/js/main.js',
     ];
 
+    if (is_front_page()) {
+        $entries['vite-wordpress-page-front'] = 'src/js/pages/front-page/index.js';
+
+        return $entries;
+    }
+
     if (is_post_type_archive('products')) {
         $entries['vite-wordpress-archive-products'] = 'src/js/archives/products/index.js';
 
