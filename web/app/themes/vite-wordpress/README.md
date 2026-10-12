@@ -62,7 +62,7 @@ import '@scss/singles/products/index.scss';
 └── src/scss/archives/products/index.scss
 ```
 
-現在、`products` と `gallery` のアーカイブはどちらも `archives/products` エントリーを使用します。`news` は `archives/news` エントリーを使用します。新しい投稿タイプのアーカイブを追加する場合は、アセットの作成に加えて `vite_wordpress_starter_get_entries()` に判定を追加してください。
+現在、`products` と `gallery` のアーカイブはどちらも `archives/products` エントリーを使用します。`news` は `archives/news` エントリーを使用します。新しい投稿タイプのアーカイブを追加する場合は、アセットの作成に加えて `inc/vite-assets.php` の `vite_wordpress_starter_get_entries()` に判定を追加してください。
 
 ### 個別投稿
 
