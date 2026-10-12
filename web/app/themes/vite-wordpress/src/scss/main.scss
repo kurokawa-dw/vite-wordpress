@@ -1,15 +1,18 @@
 @use 'sass:color';
+@use 'foundation/variables';
+@use 'foundation/reset';
+@use 'foundation/base';
+@use 'layout/header';
+@use 'layout/main';
+@use 'layout/footer';
+@use 'components/button';
+@use 'components/post-card';
 
 $ink: #183153;
 $accent: #7c3aed;
 $paper: #f6f3ff;
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
   color: $ink;
   font-family:
     system-ui,
