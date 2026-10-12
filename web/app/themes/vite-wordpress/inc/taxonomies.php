@@ -5,7 +5,7 @@
  */
 function vite_wordpress_register_custom_taxonomies(): void
 {
-    register_taxonomy('product_category', ['products'], [
+    register_taxonomy('product_category', ['products', 'gallery'], [
         'labels' => [
             'name' => '商品カテゴリー',
             'singular_name' => '商品カテゴリー',
@@ -28,7 +28,7 @@ function vite_wordpress_register_custom_taxonomies(): void
         ],
     ]);
 
-    register_taxonomy('product_type', ['products'], [
+    register_taxonomy('product_type', ['products', 'gallery'], [
         'labels' => [
             'name' => '商品タイプ',
             'singular_name' => '商品タイプ',
