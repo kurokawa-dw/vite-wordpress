@@ -10,8 +10,4 @@
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
 
-    <header class="site-header">
-        <a class="site-header__brand" href="<?php echo esc_url(home_url('/')); ?>">
-            <?php bloginfo('name'); ?>
-        </a>
-    </header>
+    <?php get_template_part('template-parts/header/site-header'); ?>
