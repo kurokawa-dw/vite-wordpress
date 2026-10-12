@@ -51,6 +51,29 @@ function register_custom_post_type()
             'slug' => 'products'
         ],
     ]);
+
+    register_post_type('gallery', [
+        'labels' => [
+            'name' => '商品ギャラリー',
+            'singular_name' => '商品ギャラリー',
+            'add_new' => '新規追加',
+            'add_new_item' => '商品ギャラリーを追加',
+            'edit_item' => '商品ギャラリーを編集',
+        ],
+        'public' => true,
+        'has_archive' => true,
+
+        'supports' => [
+            'title',
+            'thumbnail'
+        ],
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-megaphone',
+
+        'rewrite' => [
+            'slug' => 'gallery'
+        ],
+    ]);
 }
 
 add_action('init', 'register_custom_post_type');
