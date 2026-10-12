@@ -1,0 +1,12 @@
+@use '../../foundation/variables';
+
+body.single-products {
+  color: variables.$products-ink;
+  background: #fbfaf7;
+}
+
+.single-products .order-page {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 8vw, 7rem);
+}

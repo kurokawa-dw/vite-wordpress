@@ -32,10 +32,11 @@ add_action('after_setup_theme', 'vite_wordpress_starter_setup');
 /**
  * 現在のページで必要なViteエントリーを返す。
  *
- * 固定ページではページ階層、投稿タイプアーカイブでは投稿タイプ名と
+ * 固定ページではページ階層、投稿タイプアーカイブと個別投稿では投稿タイプ名と
  * src/js以下のディレクトリ階層を対応させる。
  * 例: /about/company/ -> src/js/pages/about/company/index.js
  * 例: /products/ -> src/js/archives/products/index.js
+ * 例: productsの個別投稿 -> src/js/singles/products/index.js
  *
  * @return array<string, string>
  */
@@ -59,6 +60,22 @@ function vite_wordpress_starter_get_entries(): array
 
     if (is_post_type_archive('news')) {
         $entries['vite-wordpress-archive-news'] = 'src/js/archives/news/index.js';
+
+        return $entries;
+    }
+
+    if (is_singular() && !is_page()) {
+        $post_type = get_post_type(get_queried_object_id());
+
+        if (!is_string($post_type) || $post_type === '') {
+            return $entries;
+        }
+
+        $post_type = sanitize_key($post_type);
+        $entries['vite-wordpress-single-' . $post_type] = sprintf(
+            'src/js/singles/%s/index.js',
+            $post_type,
+        );
 
         return $entries;
     }

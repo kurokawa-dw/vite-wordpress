@@ -6,6 +6,7 @@ import FullReload from 'vite-plugin-full-reload';
 const themeRoot = import.meta.dirname;
 const pageRoot = resolve(themeRoot, 'src/js/pages');
 const archiveRoot = resolve(themeRoot, 'src/js/archives');
+const singleRoot = resolve(themeRoot, 'src/js/singles');
 
 function findJavaScriptFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -43,6 +44,18 @@ const archiveEntries = Object.fromEntries(
   }),
 );
 
+const singleEntries = Object.fromEntries(
+  findJavaScriptFiles(singleRoot).map((file) => {
+    const name = relative(singleRoot, file)
+      .replaceAll('\\', '/')
+      .replace(/\/index\.js$/, '')
+      .replace(/\.js$/, '')
+      .replaceAll('/', '-');
+
+    return [`single-${name}`, file];
+  }),
+);
+
 export default defineConfig({
   base: './',
   resolve: {
@@ -60,6 +73,7 @@ export default defineConfig({
         main: resolve(themeRoot, 'src/js/main.js'),
         ...pageEntries,
         ...archiveEntries,
+        ...singleEntries,
       },
     },
   },
