@@ -19,10 +19,10 @@ $products_archive_url = get_post_type_archive_link('products');
 $selected_product_categories = vite_wordpress_sanitize_product_filter_terms(
     get_query_var('product_categories', [])
 );
-$selected_product_brands = vite_wordpress_sanitize_product_filter_terms(
+$selected_product_type = vite_wordpress_sanitize_product_filter_terms(
     get_query_var('product_brands', [])
 );
-$has_product_filters = $selected_product_categories !== [] || $selected_product_brands !== [];
+$has_product_filters = $selected_product_categories !== [] || $selected_product_type !== [];
 
 // 管理画面で設定されているproduct_category のtermを取得
 $product_category_terms = get_terms([
@@ -33,7 +33,7 @@ $product_category_terms = get_terms([
 
 // 管理画面で設定されている product_brand のtermを取得
 $product_brand_terms = get_terms([
-    'taxonomy' => 'product_brand',
+    'taxonomy' => 'product_type',
     'hide_empty' => true,
     'orderby' => 'name',
 ]);
@@ -43,40 +43,21 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
 ?>
 
 <main class="site-main products-archive">
-    <section class="products-hero" aria-labelledby="products-title">
-        <div class="products-hero__copy">
-            <p class="products-eyebrow">Our collection</p>
-            <h1 id="products-title">Products</h1>
-            <p class="products-hero__lead">日々の景色を、<br>少しだけ心地よく。</p>
-        </div>
 
-        <div class="products-hero__side">
-            <p>
-                素材、かたち、使い心地。ひとつひとつを丁寧に考え、
-                暮らしに自然となじむプロダクトをお届けします。
-            </p>
-            <?php if ($published_product_count > 0): ?>
-                <p class="products-hero__count">
-                    <span><?php echo esc_html(sprintf('%02d', $published_product_count)); ?></span>
-                    items in collection
-                </p>
-            <?php endif; ?>
-        </div>
-
-        <div class="products-hero__shape" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </section>
 
     <section class="products-catalogue" aria-labelledby="products-list-title">
         <header class="products-catalogue__header" data-products-reveal>
             <div>
                 <p class="products-eyebrow">All products</p>
                 <h2 id="products-list-title">商品一覧</h2>
+                <?php if ($published_product_count > 0): ?>
+                    <p class="products-hero__count">
+                        <span><?php echo esc_html(sprintf('%02d', $published_product_count)); ?></span>
+                        items in collection
+                    </p>
+                <?php endif; ?>
             </div>
-            <p>気になる商品を選んで、詳しい特徴をご覧ください。</p>
+
         </header>
 
         <form
@@ -106,7 +87,7 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
             </fieldset>
 
             <fieldset class="products-filter__group">
-                <legend>ブランド</legend>
+                <legend>タイプ</legend>
                 <?php if ($product_brand_terms !== []): ?>
                     <div class="products-filter__options">
                         <?php foreach ($product_brand_terms as $term): ?>
@@ -115,13 +96,13 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                                     type="checkbox"
                                     name="product_brands[]"
                                     value="<?php echo esc_attr($term->slug); ?>"
-                                    <?php checked(in_array($term->slug, $selected_product_brands, true)); ?>>
+                                    <?php checked(in_array($term->slug, $selected_product_type, true)); ?>>
                                 <span><?php echo esc_html($term->name); ?></span>
                             </label>
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p class="products-filter__empty">選択できるブランドはありません。</p>
+                    <p class="products-filter__empty">選択できるタイプはありません。</p>
                 <?php endif; ?>
             </fieldset>
 
@@ -203,7 +184,7 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                 'type' => 'list',
                 'add_args' => array_filter([
                     'product_categories' => $selected_product_categories,
-                    'product_brands' => $selected_product_brands,
+                    'product_brands' => $selected_product_type,
                 ]),
                 'prev_text' => '<span aria-hidden="true">&#8592;</span><span class="screen-reader-text">前のページ</span>',
                 'next_text' => '<span class="screen-reader-text">次のページ</span><span aria-hidden="true">&#8594;</span>',
