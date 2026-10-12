@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Company page template.
+ * order page template.
  *
  * @package ViteWordPressStarter
  */
