@@ -4,7 +4,7 @@
      </a>
 
      <nav>
-         <ul>
+         <ul role="list" class="site-header__nav-list">
              <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
              <li><a href="<?php echo esc_url(home_url('/products/')); ?>">Products</a></li>
              <li><a href="<?php echo esc_url(home_url('/order/')); ?>">Order</a></li>

@@ -1,1 +1,5 @@
 @use '../foundation/variables';
+
+.site-main {
+  padding-block: clamp(3rem, 10vw, 8rem);
+}

@@ -1,1 +1,30 @@
 @use '../../foundation/variables';
+
+.section {
+  margin-top: 3rem;
+
+  + .section {
+    margin-top: 50px;
+    padding-top: 50px;
+    border-top: 1px solid #ccc;
+  }
+
+  h2 {
+    font-size: 16px;
+    margin-bottom: 1em;
+  }
+  article {
+    font-size: 14px;
+    h3 {
+      font-weight: 400;
+    }
+  }
+
+  .all-view {
+    text-align: right;
+  }
+}
+
+.section-contact {
+  margin-top: 100px;
+}

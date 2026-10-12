@@ -1,14 +1,8 @@
 @use 'sass:color';
-
-$news-ink: #17201d;
-$news-muted: #66706c;
-$news-paper: #f8f6f0;
-$news-blue: #315c6b;
-$news-yellow: #e4ba52;
-$news-line: rgba($news-ink, 0.15);
+@use '../../foundation/variables';
 
 body.post-type-archive-news {
-  color: $news-ink;
+  color: variables.$news-ink;
   background: #fff;
 }
 
@@ -20,7 +14,7 @@ body.post-type-archive-news {
 
 .news-eyebrow {
   margin: 0 0 1rem;
-  color: $news-blue;
+  color: variables.$news-blue;
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.2em;
@@ -36,7 +30,7 @@ body.post-type-archive-news {
   padding: clamp(2rem, 7vw, 6rem);
   overflow: hidden;
   border-radius: clamp(1.25rem, 3vw, 2.5rem);
-  background: $news-paper;
+  background: variables.$news-paper;
   isolation: isolate;
 
   &__heading {
@@ -70,8 +64,8 @@ body.post-type-archive-news {
     max-width: 28rem;
     margin: 1.5rem 0 0;
     padding-top: 1.5rem;
-    border-top: 1px solid $news-line;
-    color: $news-muted;
+    border-top: 1px solid variables.$news-line;
+    color: variables.$news-muted;
     font-size: 0.92rem;
   }
 
@@ -82,7 +76,7 @@ body.post-type-archive-news {
     z-index: -1;
     width: min(29vw, 21rem);
     aspect-ratio: 0.72;
-    border: 1px solid rgba($news-blue, 0.18);
+    border: 1px solid rgba(variables.$news-blue, 0.18);
     transform: rotate(8deg);
 
     &::before,
@@ -97,11 +91,11 @@ body.post-type-archive-news {
       right: 13%;
       left: 13%;
       height: 1px;
-      background: rgba($news-blue, 0.2);
+      background: rgba(variables.$news-blue, 0.2);
       box-shadow:
-        0 3.5rem rgba($news-blue, 0.14),
-        0 7rem rgba($news-blue, 0.14),
-        0 10.5rem rgba($news-blue, 0.14);
+        0 3.5rem rgba(variables.$news-blue, 0.14),
+        0 7rem rgba(variables.$news-blue, 0.14),
+        0 10.5rem rgba(variables.$news-blue, 0.14);
     }
 
     &::after {
@@ -110,7 +104,7 @@ body.post-type-archive-news {
       width: 7rem;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: rgba($news-yellow, 0.76);
+      background: rgba(variables.$news-yellow, 0.76);
     }
 
     span:nth-child(1) {
@@ -118,7 +112,7 @@ body.post-type-archive-news {
       left: 13%;
       width: 20%;
       height: 0.42rem;
-      background: $news-blue;
+      background: variables.$news-blue;
     }
 
     span:nth-child(2) {
@@ -126,7 +120,7 @@ body.post-type-archive-news {
       bottom: 8%;
       width: 24%;
       height: 1px;
-      background: $news-blue;
+      background: variables.$news-blue;
     }
 
     span:nth-child(3) {
@@ -135,7 +129,7 @@ body.post-type-archive-news {
       width: 0.65rem;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: $news-blue;
+      background: variables.$news-blue;
     }
   }
 }
@@ -163,14 +157,14 @@ body.post-type-archive-news {
     gap: 0.6rem;
     align-items: baseline;
     margin: 0;
-    color: $news-muted;
+    color: variables.$news-muted;
     font-size: 0.68rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
 
     span {
-      color: $news-ink;
+      color: variables.$news-ink;
       font-size: 1.5rem;
       letter-spacing: -0.04em;
     }
@@ -178,12 +172,12 @@ body.post-type-archive-news {
 }
 
 .news-list {
-  border-top: 1px solid $news-ink;
+  border-top: 1px solid variables.$news-ink;
 }
 
 .news-card {
   margin: 0;
-  border-bottom: 1px solid $news-line;
+  border-bottom: 1px solid variables.$news-line;
 
   &__link {
     position: relative;
@@ -199,7 +193,7 @@ body.post-type-archive-news {
       position: absolute;
       inset: 0 -1.5rem;
       z-index: -1;
-      background: $news-paper;
+      background: variables.$news-paper;
       opacity: 0;
       transition: opacity 220ms ease;
       content: '';
@@ -210,13 +204,13 @@ body.post-type-archive-news {
     display: flex;
     flex-direction: column;
     align-self: start;
-    color: $news-muted;
+    color: variables.$news-muted;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.13em;
 
     span {
-      color: $news-ink;
+      color: variables.$news-ink;
       font-weight: 500;
       font-size: clamp(2.75rem, 5vw, 4.2rem);
       line-height: 0.9;
@@ -226,7 +220,7 @@ body.post-type-archive-news {
 
   &__label {
     margin: 0 0 0.75rem;
-    color: $news-blue;
+    color: variables.$news-blue;
     font-size: 0.66rem;
     font-weight: 800;
     letter-spacing: 0.18em;
@@ -245,7 +239,7 @@ body.post-type-archive-news {
     max-width: 47rem;
     margin: 0.8rem 0 0;
     overflow: hidden;
-    color: $news-muted;
+    color: variables.$news-muted;
     font-size: 0.88rem;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -256,7 +250,7 @@ body.post-type-archive-news {
     width: 3.25rem;
     aspect-ratio: 1;
     place-items: center;
-    border: 1px solid $news-line;
+    border: 1px solid variables.$news-line;
     border-radius: 50%;
     transition:
       color 220ms ease,
@@ -281,7 +275,7 @@ body.post-type-archive-news {
 
     .news-card__arrow {
       color: #fff;
-      background: $news-blue;
+      background: variables.$news-blue;
       transform: translateX(0.3rem);
     }
   }
@@ -311,20 +305,20 @@ body.post-type-archive-news {
 
     .current {
       color: #fff;
-      background: $news-blue;
+      background: variables.$news-blue;
     }
 
     a:hover,
     a:focus-visible {
-      background: $news-paper;
+      background: variables.$news-paper;
     }
   }
 }
 
 .news-empty {
   padding: clamp(3rem, 9vw, 7rem) 1.5rem;
-  border-top: 1px solid $news-ink;
-  border-bottom: 1px solid $news-line;
+  border-top: 1px solid variables.$news-ink;
+  border-bottom: 1px solid variables.$news-line;
   text-align: center;
 
   &__mark {
@@ -335,7 +329,7 @@ body.post-type-archive-news {
     margin: 0 auto;
     border-radius: 50%;
     color: #fff;
-    background: $news-blue;
+    background: variables.$news-blue;
     font-size: 1.25rem;
   }
 
@@ -346,7 +340,7 @@ body.post-type-archive-news {
 
   > p:not(.news-empty__mark) {
     margin: 0 auto;
-    color: $news-muted;
+    color: variables.$news-muted;
   }
 
   a {
@@ -355,14 +349,14 @@ body.post-type-archive-news {
     padding: 0.85rem 1.4rem;
     border-radius: 999px;
     color: #fff;
-    background: $news-ink;
+    background: variables.$news-ink;
     font-size: 0.84rem;
     font-weight: 800;
     text-decoration: none;
 
     &:hover,
     &:focus-visible {
-      background: color.adjust($news-ink, $lightness: 8%);
+      background: color.adjust(variables.$news-ink, $lightness: 8%);
     }
   }
 }

@@ -1,17 +1,10 @@
 @use 'sass:color';
-
-$company-ink: #16332d;
-$company-muted: #59706a;
-$company-green: #24745f;
-$company-mint: #dcefe8;
-$company-pale: #f3f8f5;
-$company-line: #cddbd6;
-$company-yellow: #f2c94c;
+@use '../../foundation/variables';
 
 .company-page {
   --company-section-space: clamp(4.5rem, 10vw, 8rem);
 
-  color: $company-ink;
+  color: variables.$company-ink;
   overflow: hidden;
 }
 
@@ -22,7 +15,7 @@ $company-yellow: #f2c94c;
   padding: clamp(3rem, 8vw, 7rem);
   overflow: hidden;
   border-radius: clamp(1.5rem, 4vw, 3rem);
-  background: $company-pale;
+  background: variables.$company-pale;
   isolation: isolate;
 
   &__content {
@@ -48,7 +41,7 @@ $company-yellow: #f2c94c;
   &__description {
     max-width: 37rem;
     margin: 2rem 0 0;
-    color: $company-muted;
+    color: variables.$company-muted;
     font-size: clamp(1rem, 2vw, 1.15rem);
   }
 
@@ -67,17 +60,17 @@ $company-yellow: #f2c94c;
 
     span:nth-child(1) {
       inset: 0;
-      background: $company-mint;
+      background: variables.$company-mint;
     }
 
     span:nth-child(2) {
       inset: 22%;
-      background: $company-green;
+      background: variables.$company-green;
     }
 
     span:nth-child(3) {
       inset: 42%;
-      background: $company-yellow;
+      background: variables.$company-yellow;
     }
   }
 }
@@ -88,12 +81,12 @@ $company-yellow: #f2c94c;
   justify-content: center;
   padding: 1.5rem 0;
   overflow-x: auto;
-  border-bottom: 1px solid $company-line;
+  border-bottom: 1px solid variables.$company-line;
   white-space: nowrap;
 
   a {
     position: relative;
-    color: $company-muted;
+    color: variables.$company-muted;
     font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
@@ -104,7 +97,7 @@ $company-yellow: #f2c94c;
       bottom: -0.4rem;
       left: 0;
       height: 2px;
-      background: $company-green;
+      background: variables.$company-green;
       content: '';
       transform: scaleX(0);
       transform-origin: left;
@@ -123,7 +116,7 @@ $company-yellow: #f2c94c;
   scroll-margin-top: 2rem;
 
   & + & {
-    border-top: 1px solid $company-line;
+    border-top: 1px solid variables.$company-line;
   }
 
   &__heading {
@@ -146,7 +139,7 @@ $company-yellow: #f2c94c;
 }
 
 .company-section-label {
-  color: $company-green;
+  color: variables.$company-green;
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -171,7 +164,7 @@ $company-yellow: #f2c94c;
 
     > p:last-child {
       margin-bottom: 0;
-      color: $company-muted;
+      color: variables.$company-muted;
     }
   }
 
@@ -194,11 +187,11 @@ $company-yellow: #f2c94c;
   min-height: 19rem;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border-radius: 1.25rem;
-  background: $company-pale;
+  background: variables.$company-pale;
 
   &__number {
     margin: 0 0 clamp(3rem, 7vw, 5rem);
-    color: $company-green;
+    color: variables.$company-green;
     font-weight: 800;
   }
 
@@ -210,7 +203,7 @@ $company-yellow: #f2c94c;
 
   p:last-child {
     margin: 0;
-    color: $company-muted;
+    color: variables.$company-muted;
     font-size: 0.95rem;
   }
 }
@@ -219,10 +212,10 @@ $company-yellow: #f2c94c;
   margin-inline: calc(50% - 50vw);
   padding: var(--company-section-space) max(1rem, calc((100vw - 70rem) / 2));
   color: #fff;
-  background: $company-ink;
+  background: variables.$company-ink;
 
   .company-section-label {
-    color: color.adjust($company-mint, $lightness: 5%);
+    color: color.adjust(variables.$company-mint, $lightness: 5%);
   }
 
   &__list {
@@ -234,7 +227,7 @@ $company-yellow: #f2c94c;
 
     > div {
       padding: 2rem clamp(1rem, 3vw, 2rem);
-      background: $company-ink;
+      background: variables.$company-ink;
     }
 
     dt {
@@ -269,7 +262,7 @@ $company-yellow: #f2c94c;
 
   dl {
     margin: 0;
-    border-top: 1px solid $company-line;
+    border-top: 1px solid variables.$company-line;
   }
 
   dl > div {
@@ -277,7 +270,7 @@ $company-yellow: #f2c94c;
     grid-template-columns: minmax(8rem, 0.3fr) 1fr;
     gap: 2rem;
     padding: 1.35rem 0;
-    border-bottom: 1px solid $company-line;
+    border-bottom: 1px solid variables.$company-line;
   }
 
   dt {
@@ -286,7 +279,7 @@ $company-yellow: #f2c94c;
 
   dd {
     margin: 0;
-    color: $company-muted;
+    color: variables.$company-muted;
   }
 }
 
@@ -303,7 +296,7 @@ $company-yellow: #f2c94c;
     bottom: 0.7rem;
     left: 5.4rem;
     width: 1px;
-    background: $company-line;
+    background: variables.$company-line;
     content: '';
   }
 
@@ -321,14 +314,14 @@ $company-yellow: #f2c94c;
       width: 9px;
       height: 9px;
       border-radius: 50%;
-      background: $company-green;
+      background: variables.$company-green;
       box-shadow: 0 0 0 5px #fff;
       content: '';
     }
   }
 
   time {
-    color: $company-green;
+    color: variables.$company-green;
     font-weight: 800;
   }
 
@@ -353,9 +346,19 @@ $company-yellow: #f2c94c;
     overflow: hidden;
     border-radius: 1.25rem;
     background:
-      linear-gradient(32deg, transparent 48%, rgba($company-green, 0.1) 49% 51%, transparent 52%),
-      linear-gradient(118deg, transparent 48%, rgba($company-green, 0.1) 49% 51%, transparent 52%),
-      $company-mint;
+      linear-gradient(
+        32deg,
+        transparent 48%,
+        rgba(variables.$company-green, 0.1) 49% 51%,
+        transparent 52%
+      ),
+      linear-gradient(
+        118deg,
+        transparent 48%,
+        rgba(variables.$company-green, 0.1) 49% 51%,
+        transparent 52%
+      ),
+      variables.$company-mint;
     background-size:
       6rem 6rem,
       7rem 7rem,
@@ -366,8 +369,8 @@ $company-yellow: #f2c94c;
       height: 2rem;
       border: 0.45rem solid #fff;
       border-radius: 50% 50% 50% 0;
-      background: $company-green;
-      box-shadow: 0 0.5rem 1rem rgba($company-ink, 0.22);
+      background: variables.$company-green;
+      box-shadow: 0 0.5rem 1rem rgba(variables.$company-ink, 0.22);
       content: '';
       transform: rotate(-45deg);
     }
@@ -378,7 +381,7 @@ $company-yellow: #f2c94c;
       padding: 0.4rem 0.7rem;
       border-radius: 0.4rem;
       color: #fff;
-      background: $company-ink;
+      background: variables.$company-ink;
       font-size: 0.75rem;
       font-weight: 700;
     }
@@ -392,7 +395,7 @@ $company-yellow: #f2c94c;
 
     p,
     li {
-      color: $company-muted;
+      color: variables.$company-muted;
     }
 
     ul {
@@ -412,11 +415,11 @@ $company-yellow: #f2c94c;
   margin-top: 1rem;
   padding: clamp(3rem, 8vw, 6rem);
   border-radius: clamp(1.5rem, 4vw, 3rem);
-  background: $company-yellow;
+  background: variables.$company-yellow;
   text-align: center;
 
   .company-section-label {
-    color: $company-ink;
+    color: variables.$company-ink;
   }
 
   h2 {
@@ -438,7 +441,7 @@ $company-yellow: #f2c94c;
     padding: 1rem 1.5rem;
     border-radius: 999px;
     color: #fff;
-    background: $company-ink;
+    background: variables.$company-ink;
     font-weight: 700;
     text-decoration: none;
     transition:
@@ -452,7 +455,7 @@ $company-yellow: #f2c94c;
 
     &:hover,
     &:focus-visible {
-      background: color.adjust($company-ink, $lightness: 8%);
+      background: color.adjust(variables.$company-ink, $lightness: 8%);
       transform: translateY(-2px);
     }
   }

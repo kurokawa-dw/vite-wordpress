@@ -1,15 +1,8 @@
 @use 'sass:color';
-
-$products-ink: #17201d;
-$products-muted: #66706c;
-$products-cream: #f3efe5;
-$products-sand: #dfd6c3;
-$products-orange: #e85d2a;
-$products-green: #637a63;
-$products-line: rgba($products-ink, 0.15);
+@use '../../foundation/variables';
 
 body.post-type-archive-products {
-  color: $products-ink;
+  color: variables.$products-ink;
   background: #fbfaf7;
 }
 
@@ -21,140 +14,140 @@ body.post-type-archive-products {
 
 .products-eyebrow {
   margin: 0 0 1rem;
-  color: $products-orange;
+  color: variables.$products-orange;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-.products-hero {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
-  gap: clamp(2rem, 7vw, 7rem);
-  min-height: min(38rem, 72vh);
-  padding: clamp(2rem, 7vw, 6rem);
-  overflow: hidden;
-  border-radius: clamp(1.5rem, 4vw, 3rem);
-  background: $products-cream;
-  isolation: isolate;
+// .products-hero {
+//   position: relative;
+//   display: grid;
+//   grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+//   gap: clamp(2rem, 7vw, 7rem);
+//   min-height: min(38rem, 72vh);
+//   padding: clamp(2rem, 7vw, 6rem);
+//   overflow: hidden;
+//   border-radius: clamp(1.5rem, 4vw, 3rem);
+//   background: variables.$products-cream;
+//   isolation: isolate;
 
-  &__copy {
-    z-index: 1;
-    align-self: center;
-  }
+//   &__copy {
+//     z-index: 1;
+//     align-self: center;
+//   }
 
-  h1 {
-    margin: 0;
-    font-weight: 500;
-    font-size: clamp(4.7rem, 13vw, 10.5rem);
-    line-height: 0.82;
-    letter-spacing: -0.075em;
-  }
+//   h1 {
+//     margin: 0;
+//     font-weight: 500;
+//     font-size: clamp(4.7rem, 13vw, 10.5rem);
+//     line-height: 0.82;
+//     letter-spacing: -0.075em;
+//   }
 
-  &__lead {
-    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
-    font-weight: 700;
-    font-size: clamp(1.8rem, 4vw, 3.2rem);
-    line-height: 1.4;
-    letter-spacing: -0.04em;
-  }
+//   &__lead {
+//     margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+//     font-weight: 700;
+//     font-size: clamp(1.8rem, 4vw, 3.2rem);
+//     line-height: 1.4;
+//     letter-spacing: -0.04em;
+//   }
 
-  &__side {
-    z-index: 1;
-    align-self: end;
-    padding-bottom: 1rem;
+//   &__side {
+//     z-index: 1;
+//     align-self: end;
+//     padding-bottom: 1rem;
 
-    > p:first-child {
-      max-width: 29rem;
-      margin: 0;
-      color: $products-muted;
-      font-size: 0.98rem;
-    }
-  }
+//     > p:first-child {
+//       max-width: 29rem;
+//       margin: 0;
+//       color: variables.$products-muted;
+//       font-size: 0.98rem;
+//     }
+//   }
 
-  &__count {
-    display: flex;
-    gap: 0.8rem;
-    align-items: baseline;
-    margin: 2.5rem 0 0;
-    padding-top: 1rem;
-    border-top: 1px solid $products-line;
-    color: $products-muted;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+//   &__count {
+//     display: flex;
+//     gap: 0.8rem;
+//     align-items: baseline;
+//     margin: 2.5rem 0 0;
+//     padding-top: 1rem;
+//     border-top: 1px solid variables.$products-line;
+//     color: variables.$products-muted;
+//     font-size: 0.7rem;
+//     font-weight: 700;
+//     letter-spacing: 0.12em;
+//     text-transform: uppercase;
 
-    span {
-      color: $products-ink;
-      font-size: 1.5rem;
-      letter-spacing: -0.04em;
-    }
-  }
+//     span {
+//       color: variables.$products-ink;
+//       font-size: 1.5rem;
+//       letter-spacing: -0.04em;
+//     }
+//   }
 
-  &__shape {
-    position: absolute;
-    top: -5rem;
-    right: -7rem;
-    z-index: -1;
-    width: min(36vw, 27rem);
-    aspect-ratio: 1;
-    border: 1px solid rgba($products-green, 0.22);
-    border-radius: 50%;
+//   &__shape {
+//     position: absolute;
+//     top: -5rem;
+//     right: -7rem;
+//     z-index: -1;
+//     width: min(36vw, 27rem);
+//     aspect-ratio: 1;
+//     border: 1px solid rgba(variables.$products-green, 0.22);
+//     border-radius: 50%;
 
-    span {
-      position: absolute;
-      border-radius: 50%;
-    }
+//     span {
+//       position: absolute;
+//       border-radius: 50%;
+//     }
 
-    span:nth-child(1) {
-      inset: 16%;
-      background: rgba($products-green, 0.14);
-    }
+//     span:nth-child(1) {
+//       inset: 16%;
+//       background: rgba(variables.$products-green, 0.14);
+//     }
 
-    span:nth-child(2) {
-      inset: 35%;
-      background: $products-orange;
-    }
+//     span:nth-child(2) {
+//       inset: 35%;
+//       background: variables.$products-orange;
+//     }
 
-    span:nth-child(3) {
-      right: 27%;
-      bottom: -35%;
-      width: 26%;
-      aspect-ratio: 1;
-      background: $products-sand;
-    }
-  }
-}
+//     span:nth-child(3) {
+//       right: 27%;
+//       bottom: -35%;
+//       width: 26%;
+//       aspect-ratio: 1;
+//       background: variables.$products-sand;
+//     }
+//   }
+// }
 
-.products-catalogue {
-  padding-block: var(--products-space);
+// .products-catalogue {
+//   padding-block: var(--products-space);
 
-  &__header {
-    display: grid;
-    grid-template-columns: 1fr minmax(16rem, 0.55fr);
-    gap: 2rem;
-    align-items: end;
-    margin-bottom: clamp(2.5rem, 6vw, 5rem);
-    padding-bottom: 2rem;
-    border-bottom: 1px solid $products-line;
+//   &__header {
+//     display: grid;
+//     grid-template-columns: 1fr minmax(16rem, 0.55fr);
+//     gap: 2rem;
+//     align-items: end;
+//     margin-bottom: clamp(2.5rem, 6vw, 5rem);
+//     padding-bottom: 2rem;
+//     border-bottom: 1px solid variables.$products-line;
 
-    h2 {
-      margin: 0;
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
+//     h2 {
+//       margin: 0;
+//       font-size: clamp(2.6rem, 6vw, 5rem);
+//       line-height: 1;
+//       letter-spacing: -0.055em;
+//     }
 
-    > p {
-      max-width: 28rem;
-      margin: 0;
-      color: $products-muted;
-    }
-  }
-}
+//     > p {
+//       max-width: 28rem;
+//       margin: 0;
+//       color: variables.$products-muted;
+//     }
+//   }
+// }
 
 .products-filter {
   display: grid;
@@ -162,9 +155,9 @@ body.post-type-archive-products {
   gap: 2rem clamp(1.5rem, 4vw, 4rem);
   margin-bottom: clamp(3rem, 7vw, 5rem);
   padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid $products-line;
+  border: 1px solid variables.$products-line;
   border-radius: 1rem;
-  background: $products-cream;
+  background: variables.$products-cream;
 
   &__group {
     min-width: 0;
@@ -193,7 +186,7 @@ body.post-type-archive-products {
     align-items: center;
     min-height: 2.75rem;
     padding: 0.6rem 0.85rem;
-    border: 1px solid rgba($products-ink, 0.18);
+    border: 1px solid rgba(variables.$products-ink, 0.18);
     border-radius: 999px;
     background: #fff;
     font-size: 0.82rem;
@@ -207,19 +200,19 @@ body.post-type-archive-products {
       width: 1rem;
       height: 1rem;
       margin: 0;
-      accent-color: $products-orange;
+      accent-color: variables.$products-orange;
     }
 
     &:hover,
     &:focus-within {
-      border-color: $products-orange;
-      background: rgba($products-orange, 0.06);
+      border-color: variables.$products-orange;
+      background: rgba(variables.$products-orange, 0.06);
     }
   }
 
   &__empty {
     margin: 0;
-    color: $products-muted;
+    color: variables.$products-muted;
     font-size: 0.82rem;
   }
 
@@ -242,12 +235,12 @@ body.post-type-archive-products {
       border: 0;
       border-radius: 999px;
       color: #fff;
-      background: $products-ink;
+      background: variables.$products-ink;
       cursor: pointer;
 
       &:hover,
       &:focus-visible {
-        background: color.adjust($products-ink, $lightness: 8%);
+        background: color.adjust(variables.$products-ink, $lightness: 8%);
       }
     }
 
@@ -261,7 +254,7 @@ body.post-type-archive-products {
   &__result {
     grid-column: 1 / -1;
     margin: 0;
-    color: $products-muted;
+    color: variables.$products-muted;
     font-size: 0.78rem;
     font-weight: 700;
   }
@@ -269,7 +262,7 @@ body.post-type-archive-products {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem);
 }
 
@@ -283,9 +276,9 @@ body.post-type-archive-products {
 
   &__media {
     position: relative;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
-    background: $products-cream;
+    background: variables.$products-cream;
   }
 
   &__image {
@@ -302,14 +295,18 @@ body.post-type-archive-products {
     place-items: center;
     overflow: hidden;
     background:
-      radial-gradient(circle at 50% 50%, rgba($products-orange, 0.92) 0 11%, transparent 11.3%),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(variables.$products-orange, 0.92) 0 11%,
+        transparent 11.3%
+      ),
       linear-gradient(
         135deg,
         transparent 49.6%,
-        rgba($products-green, 0.25) 49.8% 50.2%,
+        rgba(variables.$products-green, 0.25) 49.8% 50.2%,
         transparent 50.4%
       ),
-      $products-cream;
+      variables.$products-cream;
 
     &::before,
     &::after {
@@ -321,20 +318,20 @@ body.post-type-archive-products {
     &::before {
       width: 44%;
       aspect-ratio: 1;
-      border: 1px solid rgba($products-ink, 0.2);
+      border: 1px solid rgba(variables.$products-ink, 0.2);
     }
 
     &::after {
       width: 68%;
       aspect-ratio: 1;
-      border: 1px solid rgba($products-green, 0.18);
+      border: 1px solid rgba(variables.$products-green, 0.18);
     }
 
     span {
       position: absolute;
       right: 1.5rem;
       bottom: 1.25rem;
-      color: rgba($products-ink, 0.34);
+      color: rgba(variables.$products-ink, 0.34);
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.1em;
@@ -351,7 +348,7 @@ body.post-type-archive-products {
     place-items: center;
     border-radius: 50%;
     color: #fff;
-    background: $products-ink;
+    background: variables.$products-ink;
     font-size: 1.1rem;
     opacity: 0;
     transform: translate(-0.5rem, 0.5rem);
@@ -368,7 +365,7 @@ body.post-type-archive-products {
     display: flex;
     justify-content: space-between;
     margin: 0 0 0.8rem;
-    color: $products-muted;
+    color: variables.$products-muted;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.11em;
@@ -387,7 +384,7 @@ body.post-type-archive-products {
     max-width: 37rem;
     margin: 1rem 0 0;
     overflow: hidden;
-    color: $products-muted;
+    color: variables.$products-muted;
     font-size: 0.9rem;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -397,7 +394,7 @@ body.post-type-archive-products {
     display: inline-block;
     margin-top: 1.25rem;
     padding-bottom: 0.2rem;
-    border-bottom: 1px solid $products-ink;
+    border-bottom: 1px solid variables.$products-ink;
     font-size: 0.78rem;
     font-weight: 800;
   }
@@ -417,7 +414,7 @@ body.post-type-archive-products {
   &:nth-child(4n + 2),
   &:nth-child(4n + 3) {
     .product-card__media {
-      border-radius: 45% 45% 0 0;
+      // border-radius: 45% 45% 0 0;
     }
   }
 }
@@ -425,7 +422,7 @@ body.post-type-archive-products {
 .products-pagination {
   margin-top: var(--products-space);
   padding-top: 2rem;
-  border-top: 1px solid $products-line;
+  border-top: 1px solid variables.$products-line;
 
   .page-numbers {
     display: flex;
@@ -448,24 +445,24 @@ body.post-type-archive-products {
 
     .current {
       color: #fff;
-      background: $products-ink;
+      background: variables.$products-ink;
     }
 
     a:hover,
     a:focus-visible {
-      background: $products-cream;
+      background: variables.$products-cream;
     }
   }
 }
 
 .products-empty {
   padding: clamp(3rem, 9vw, 7rem) 1.5rem;
-  border: 1px solid $products-line;
+  border: 1px solid variables.$products-line;
   text-align: center;
 
   > span {
     display: block;
-    color: $products-orange;
+    color: variables.$products-orange;
     font-size: 3rem;
     line-height: 1;
   }
@@ -477,7 +474,7 @@ body.post-type-archive-products {
 
   p {
     margin: 0 auto;
-    color: $products-muted;
+    color: variables.$products-muted;
   }
 
   a {
@@ -486,14 +483,14 @@ body.post-type-archive-products {
     padding: 0.85rem 1.4rem;
     border-radius: 999px;
     color: #fff;
-    background: $products-ink;
+    background: variables.$products-ink;
     font-size: 0.84rem;
     font-weight: 800;
     text-decoration: none;
 
     &:hover,
     &:focus-visible {
-      background: color.adjust($products-ink, $lightness: 8%);
+      background: color.adjust(variables.$products-ink, $lightness: 8%);
     }
   }
 }

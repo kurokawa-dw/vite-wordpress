@@ -1,1 +1,23 @@
 @use 'variables';
+
+body {
+  color: variables.$ink;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+}
+
+.site-header,
+.site-footer,
+.site-main {
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+}
