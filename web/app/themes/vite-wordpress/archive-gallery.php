@@ -1,58 +1,54 @@
 <?php
 
 /**
- * Products archive template.
+ * Gallery archive template.
  *
  * @package ViteWordPressStarter
  */
 
 get_header();
 
-$product_counts = wp_count_posts('products');
+$gallery_counts = wp_count_posts('gallery');
+$published_gallery_count = isset($gallery_counts->publish) ? (int) $gallery_counts->publish : 0;
 
-// echo '<pre>';
-// print_r($product_counts);
-// echo '</pre>';
-$published_product_count = isset($product_counts->publish) ? (int) $product_counts->publish : 0;
-
-$products_archive_url = get_post_type_archive_link('products');
+$gallery_archive_url = get_post_type_archive_link('gallery');
 $selected_product_categories = vite_wordpress_sanitize_product_filter_terms(
     get_query_var('product_categories', [])
 );
 $selected_product_type = vite_wordpress_sanitize_product_filter_terms(
-    get_query_var('product_brands', [])
+    get_query_var('product_type', [])
 );
 $has_product_filters = $selected_product_categories !== [] || $selected_product_type !== [];
 
-// 管理画面で設定されているproduct_category のtermを取得
+// 管理画面で設定されている product_category の term を取得
 $product_category_terms = get_terms([
     'taxonomy' => 'product_category',
     'hide_empty' => true,
     'orderby' => 'name',
 ]);
 
-// 管理画面で設定されている product_brand のtermを取得
-$product_brand_terms = get_terms([
+// 管理画面で設定されている product_type の term を取得
+$product_type_terms = get_terms([
     'taxonomy' => 'product_type',
     'hide_empty' => true,
     'orderby' => 'name',
 ]);
 
 $product_category_terms = is_wp_error($product_category_terms) ? [] : $product_category_terms;
-$product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_terms;
+$product_type_terms = is_wp_error($product_type_terms) ? [] : $product_type_terms;
 ?>
 
 <main class="site-main products-archive">
 
 
-    <section class="products-catalogue" aria-labelledby="products-list-title">
+    <section class="products-catalogue" aria-labelledby="gallery-list-title">
         <header class="products-catalogue__header" data-products-reveal>
             <div>
-                <p class="products-eyebrow">All products</p>
-                <h2 id="products-list-title">商品一覧</h2>
-                <?php if ($published_product_count > 0): ?>
+                <p class="products-eyebrow">Gallery</p>
+                <h2 id="gallery-list-title">ギャラリー一覧</h2>
+                <?php if ($published_gallery_count > 0): ?>
                     <p class="products-hero__count">
-                        <span><?php echo esc_html(sprintf('%02d', $published_product_count)); ?></span>
+                        <span><?php echo esc_html(sprintf('%02d', $published_gallery_count)); ?></span>
                         items in collection
                     </p>
                 <?php endif; ?>
@@ -63,8 +59,8 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
         <form
             class="products-filter"
             method="get"
-            action="<?php echo esc_url($products_archive_url); ?>"
-            aria-label="商品を絞り込む"
+            action="<?php echo esc_url($gallery_archive_url); ?>"
+            aria-label="ギャラリーを絞り込む"
             data-products-reveal>
             <fieldset class="products-filter__group">
                 <legend>商品カテゴリー</legend>
@@ -88,13 +84,13 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
 
             <fieldset class="products-filter__group">
                 <legend>タイプ</legend>
-                <?php if ($product_brand_terms !== []): ?>
+                <?php if ($product_type_terms !== []): ?>
                     <div class="products-filter__options">
-                        <?php foreach ($product_brand_terms as $term): ?>
+                        <?php foreach ($product_type_terms as $term): ?>
                             <label class="products-filter__option">
                                 <input
                                     type="checkbox"
-                                    name="product_brands[]"
+                                    name="product_type[]"
                                     value="<?php echo esc_attr($term->slug); ?>"
                                     <?php checked(in_array($term->slug, $selected_product_type, true)); ?>>
                                 <span><?php echo esc_html($term->name); ?></span>
@@ -110,12 +106,12 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                 <button type="submit">絞り込む</button>
 
                 <?php if ($has_product_filters): ?>
-                    <a href="<?php echo esc_url($products_archive_url); ?>">条件をクリア</a>
+                    <a href="<?php echo esc_url($gallery_archive_url); ?>">条件をクリア</a>
                 <?php endif; ?>
             </div>
 
             <p class="products-filter__result">
-                <?php echo esc_html(sprintf('該当商品 %d件', (int) $wp_query->found_posts)); ?>
+                <?php echo esc_html(sprintf('該当作品 %d件', (int) $wp_query->found_posts)); ?>
             </p>
         </form>
 
@@ -124,24 +120,24 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                 <?php while (have_posts()): ?>
                     <?php
                     the_post();
-                    $product_excerpt = get_the_excerpt();
-                    $product_image = function_exists('get_field')
+                    $gallery_excerpt = get_the_excerpt();
+                    $gallery_image = function_exists('get_field')
                         ? get_field('product_image')
                         : null;
                     ?>
                     <article <?php post_class('product-card'); ?> data-products-reveal>
                         <a class="product-card__link" href="<?php the_permalink(); ?>">
                             <div class="product-card__media">
-                                <?php if (is_array($product_image) && !empty($product_image['ID'])): ?>
+                                <?php if (is_array($gallery_image) && !empty($gallery_image['ID'])): ?>
                                     <?php
                                     echo wp_get_attachment_image(
-                                        (int) $product_image['ID'],
+                                        (int) $gallery_image['ID'],
                                         'large',
                                         false,
                                         [
                                             'class' => 'product-card__image',
                                             'loading' => 'lazy',
-                                            'alt' => $product_image['alt'] ?: get_the_title(),
+                                            'alt' => $gallery_image['alt'] ?: get_the_title(),
                                         ]
                                     );
                                     ?>
@@ -163,14 +159,14 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
 
                             <div class="product-card__body">
                                 <p class="product-card__meta">
-                                    <span>Product</span>
+                                    <span>Gallery</span>
                                     <time datetime="<?php echo esc_attr(get_the_date('c')); ?>">
                                         <?php echo esc_html(get_the_date('Y.m.d')); ?>
                                     </time>
                                 </p>
                                 <h3><?php the_title(); ?></h3>
-                                <?php if ($product_excerpt !== ''): ?>
-                                    <p class="product-card__excerpt"><?php echo esc_html(wp_trim_words($product_excerpt, 42, '…')); ?></p>
+                                <?php if ($gallery_excerpt !== ''): ?>
+                                    <p class="product-card__excerpt"><?php echo esc_html(wp_trim_words($gallery_excerpt, 42, '…')); ?></p>
                                 <?php endif; ?>
                                 <span class="product-card__more">詳しく見る</span>
                             </div>
@@ -184,14 +180,14 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                 'type' => 'list',
                 'add_args' => array_filter([
                     'product_categories' => $selected_product_categories,
-                    'product_brands' => $selected_product_type,
+                    'product_type' => $selected_product_type,
                 ]),
                 'prev_text' => '<span aria-hidden="true">&#8592;</span><span class="screen-reader-text">前のページ</span>',
                 'next_text' => '<span class="screen-reader-text">次のページ</span><span aria-hidden="true">&#8594;</span>',
             ]);
             ?>
             <?php if ($pagination): ?>
-                <nav class="products-pagination" aria-label="商品一覧のページ送り">
+                <nav class="products-pagination" aria-label="ギャラリー一覧のページ送り">
                     <?php echo wp_kses_post($pagination); ?>
                 </nav>
             <?php endif; ?>
@@ -199,12 +195,12 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
             <div class="products-empty" data-products-reveal>
                 <span aria-hidden="true">○</span>
                 <?php if ($has_product_filters): ?>
-                    <h2>条件に一致する商品がありません</h2>
-                    <p>商品カテゴリーまたはブランドを変更してお試しください。</p>
-                    <a href="<?php echo esc_url($products_archive_url); ?>">すべての商品を表示</a>
+                    <h2>条件に一致する作品がありません</h2>
+                    <p>商品カテゴリーまたはタイプを変更してお試しください。</p>
+                    <a href="<?php echo esc_url($gallery_archive_url); ?>">すべての作品を表示</a>
                 <?php else: ?>
-                    <h2>商品を準備しています</h2>
-                    <p>新しい商品をまもなくご紹介します。公開までしばらくお待ちください。</p>
+                    <h2>ギャラリーを準備しています</h2>
+                    <p>新しい作品をまもなくご紹介します。公開までしばらくお待ちください。</p>
                     <a href="<?php echo esc_url(home_url('/')); ?>">トップページへ戻る</a>
                 <?php endif; ?>
             </div>

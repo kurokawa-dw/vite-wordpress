@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 商品絞り込み用のクエリ変数を登録する。
+ * 商品・ギャラリー絞り込み用のクエリ変数を登録する。
  *
  * @param array<int, string> $query_vars 公開クエリ変数。
  * @return array<int, string>
@@ -9,7 +9,7 @@
 function vite_wordpress_register_product_filter_query_vars(array $query_vars): array
 {
     $query_vars[] = 'product_categories';
-    $query_vars[] = 'product_brands';
+    $query_vars[] = 'product_type';
 
     return $query_vars;
 }
@@ -51,29 +51,25 @@ function vite_wordpress_sanitize_product_filter_terms(mixed $terms): array
 }
 
 /**
- * 商品アーカイブのメインクエリをタクソノミーで絞り込む。
+ * 商品・ギャラリーアーカイブのメインクエリをタクソノミーで絞り込む。
  *
  * 同一タクソノミー内は OR、異なるタクソノミー間は AND で検索する。
  */
 function vite_wordpress_filter_products_archive(WP_Query $query): void
 {
-    if (is_admin() || !$query->is_main_query() || !$query->is_post_type_archive('products')) {
+    if (is_admin() || !$query->is_main_query() || !$query->is_post_type_archive(['products', 'gallery'])) {
         return;
     }
 
     $product_categories = vite_wordpress_sanitize_product_filter_terms(
         $query->get('product_categories'),
     );
-    $product_brands = vite_wordpress_sanitize_product_filter_terms(
-        $query->get('product_brands'),
+    $product_types = vite_wordpress_sanitize_product_filter_terms(
+        $query->get('product_type'),
     );
 
-    error_log('$query get: ' . print_r($query->get('product_categories'), true));
-    error_log('$product_categories: ' . print_r($product_categories, true));
-    error_log('$product_brands: ' . print_r($product_brands, true));
-
     $query->set('product_categories', $product_categories);
-    $query->set('product_brands', $product_brands);
+    $query->set('product_type', $product_types);
 
     $tax_query = [
         'relation' => 'AND',
@@ -89,11 +85,11 @@ function vite_wordpress_filter_products_archive(WP_Query $query): void
         ];
     }
 
-    if ($product_brands !== []) {
+    if ($product_types !== []) {
         $tax_query[] = [
-            'taxonomy' => 'product_brand',
+            'taxonomy' => 'product_type',
             'field' => 'slug',
-            'terms' => $product_brands,
+            'terms' => $product_types,
             'operator' => 'IN',
             'include_children' => true,
         ];

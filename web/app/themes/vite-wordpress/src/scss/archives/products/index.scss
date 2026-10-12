@@ -1,7 +1,8 @@
 @use 'sass:color';
 @use '../../foundation/variables';
 
-body.post-type-archive-products {
+body.post-type-archive-products,
+body.post-type-archive-gallery {
   color: variables.$products-ink;
   background: #fbfaf7;
 }

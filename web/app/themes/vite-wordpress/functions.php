@@ -51,7 +51,7 @@ function vite_wordpress_starter_get_entries(): array
         return $entries;
     }
 
-    if (is_post_type_archive('products')) {
+    if (is_post_type_archive(['products', 'gallery'])) {
         $entries['vite-wordpress-archive-products'] = 'src/js/archives/products/index.js';
 
         return $entries;
