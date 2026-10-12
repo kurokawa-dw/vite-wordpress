@@ -20,7 +20,7 @@ $selected_product_categories = vite_wordpress_sanitize_product_filter_terms(
     get_query_var('product_categories', [])
 );
 $selected_product_type = vite_wordpress_sanitize_product_filter_terms(
-    get_query_var('product_brands', [])
+    get_query_var('product_type', [])
 );
 $has_product_filters = $selected_product_categories !== [] || $selected_product_type !== [];
 
@@ -94,7 +94,7 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                             <label class="products-filter__option">
                                 <input
                                     type="checkbox"
-                                    name="product_brands[]"
+                                    name="product_type[]"
                                     value="<?php echo esc_attr($term->slug); ?>"
                                     <?php checked(in_array($term->slug, $selected_product_type, true)); ?>>
                                 <span><?php echo esc_html($term->name); ?></span>
@@ -184,7 +184,7 @@ $product_brand_terms = is_wp_error($product_brand_terms) ? [] : $product_brand_t
                 'type' => 'list',
                 'add_args' => array_filter([
                     'product_categories' => $selected_product_categories,
-                    'product_brands' => $selected_product_type,
+                    'product_type' => $selected_product_type,
                 ]),
                 'prev_text' => '<span aria-hidden="true">&#8592;</span><span class="screen-reader-text">前のページ</span>',
                 'next_text' => '<span class="screen-reader-text">次のページ</span><span aria-hidden="true">&#8594;</span>',
